@@ -20,11 +20,11 @@ import retrofit2.Response;
 public class RecommentPresenter implements RecommendContract.Presenter {
     RecommendContract.View view;
     private RecommendModule module;
-
-
-    public RecommentPresenter(RecommendContract.View view) {
+    //@Inject
+    public RecommentPresenter(RecommendContract.View view, RecommendModule module) {
         this.view = view;
-        module = new RecommendModule();
+        this.module = module;
+      //  module = new RecommendModule();
     }
 
     @Override

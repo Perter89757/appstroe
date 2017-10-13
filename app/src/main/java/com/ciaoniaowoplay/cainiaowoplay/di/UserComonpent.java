@@ -11,7 +11,9 @@ import dagger.Component;
  * emaill:huangyh@thinkive.com
  * description:
  */
-@Component(modules = UserModule.class)
+
+@FragmentScope
+@Component(modules = UserModule.class,dependencies = AppComponent.class)
 public interface UserComonpent {
 
     void inject(RecommendFragment daggerActivity);
