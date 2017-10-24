@@ -1,25 +1,24 @@
 package com.ciaoniaowoplay.cainiaowoplay.ui.activity;
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.ciaoniaowoplay.cainiaowoplay.R;
+import com.ciaoniaowoplay.cainiaowoplay.di.AppComponent;
 import com.ciaoniaowoplay.cainiaowoplay.ui.adapter.ViewPagerAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity   {
 
     @BindView(R.id.navigation_view)
     NavigationView mNavigationView;
@@ -34,12 +33,21 @@ public class MainActivity extends AppCompatActivity {
     private View headerView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public void init() {
         ButterKnife.bind(this);
         initDrawerLayout();
         initTablayout();
+    }
+
+    @Override
+    public int setLayout() {
+        return R.layout.activity_main;
+    }
+
+
+    @Override
+    public void setupAcitivtyComponent(AppComponent appComponent) {
+
     }
 
     private void initTablayout() {
@@ -83,4 +91,5 @@ public class MainActivity extends AppCompatActivity {
         drawerToggle.syncState();
         mDrawerLayout.addDrawerListener(drawerToggle);
     }
+
 }

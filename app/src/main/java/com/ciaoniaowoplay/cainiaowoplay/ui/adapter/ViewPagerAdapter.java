@@ -22,6 +22,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     }
 
     private void initFragment() {
+        //采用保存class信息-->通过class获取Fragment
         mFragments.add(new FragmentInfo("推荐",RecommendFragment.class));
         mFragments.add(new FragmentInfo ("排行", RankingFragment.class));
 

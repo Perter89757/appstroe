@@ -5,6 +5,8 @@ import com.ciaoniaowoplay.cainiaowoplay.bean.PageBean;
 import com.ciaoniaowoplay.cainiaowoplay.ui.presenter.BasePresenter;
 import com.ciaoniaowoplay.cainiaowoplay.ui.presenter.view.BaseView;
 
+import java.util.List;
+
 import retrofit2.Callback;
 
 /**
@@ -18,15 +20,20 @@ import retrofit2.Callback;
 public interface RecommendContract {
 
      interface View extends BaseView {
-        void showReult(PageBean<AppInfo> response);
+        void showReult(List<AppInfo> response);
     }
 
     interface Moudle {
         void Moudlerequest(Callback<PageBean<AppInfo>> callback);
     }
 
-     interface Presenter extends BasePresenter {
-        void request();
+   abstract class Presenter extends BasePresenter {
+
+        public Presenter(Object o, BaseView baseView) {
+            super(o, baseView);
+        }
+
+        public abstract void request();
     }
 
 }
