@@ -1,6 +1,5 @@
 package com.ciaoniaowoplay.cainiaowoplay.ui.fragment;
 
-import android.app.ProgressDialog;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,10 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import com.ciaoniaowoplay.cainiaowoplay.AppApplication;
 import com.ciaoniaowoplay.cainiaowoplay.R;
 import com.ciaoniaowoplay.cainiaowoplay.bean.AppInfo;
+import com.ciaoniaowoplay.cainiaowoplay.bean.IndexBean;
 import com.ciaoniaowoplay.cainiaowoplay.di.DaggerUserComonpent;
 import com.ciaoniaowoplay.cainiaowoplay.di.UserModule;
-import com.ciaoniaowoplay.cainiaowoplay.ui.adapter.RecomendAppAdatper;
-import com.ciaoniaowoplay.cainiaowoplay.ui.presenter.contract.RecommendContract;
+import com.ciaoniaowoplay.cainiaowoplay.ui.adapter.IndexMultipleAdapter;
+import com.ciaoniaowoplay.cainiaowoplay.ui.presenter.recommand.RecommendView;
+import com.ciaoniaowoplay.cainiaowoplay.ui.presenter.recommand.RecommentPresenter;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ import butterknife.BindView;
  * Created by Ivan on 16/9/26.
  */
 
-public class RecommendFragment extends ProgressFragment implements RecommendContract.View {
+public class RecommendFragment extends ProgressFragment implements RecommendView {
 
     @BindView(R.id.recycle_view)
     RecyclerView mRecyclerView;
@@ -32,15 +33,17 @@ public class RecommendFragment extends ProgressFragment implements RecommendCont
     SwipeRefreshLayout refreshLayout;
 
     private List<AppInfo> datas;
-    private RecomendAppAdatper mAdatper;
+    //  private RecomendAppAdatper mAdatper;
 
     //  private RecommendContract.Presenter presenter;
     @Inject
-    RecommendContract.Presenter presenter;
+    RecommentPresenter presenter;
 
     //   private ProgressDialog mProgressDialog;
-    @Inject
-    ProgressDialog mProgressDialog;
+
+//    @Inject
+//    ProgressDialog mProgressDialog;
+    private IndexMultipleAdapter multipleAdapter;
 
 
     @Override
@@ -51,7 +54,6 @@ public class RecommendFragment extends ProgressFragment implements RecommendCont
     @Override
     protected void DaggerComonpent(AppApplication application) {
         DaggerUserComonpent.builder().appComponent(application.getAppComponent()).userModule(new UserModule(this)).build().inject(this);
-
     }
 
     @Override
@@ -108,16 +110,18 @@ public class RecommendFragment extends ProgressFragment implements RecommendCont
 //    }
 
     @Override
-    public void showReult(List<AppInfo> response) {
-        showContentView();
+    public void showReult(IndexBean response) {
         initRecycleView(response);
     }
 
 
-    private void initRecycleView(List<AppInfo> datas) {
+    private void initRecycleView(IndexBean datas) {
         //为RecyclerView设置布局管理器
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAdatper = new RecomendAppAdatper(getActivity(), datas);
-        mRecyclerView.setAdapter(mAdatper);
+        // mAdatper = new RecomendAppAdatper(getActivity(), datas);
+        multipleAdapter = new IndexMultipleAdapter(getActivity());
+        multipleAdapter.setData(datas);
+        // mRecyclerView.setAdapter(mAdatper);
+        mRecyclerView.setAdapter(multipleAdapter);
     }
 }

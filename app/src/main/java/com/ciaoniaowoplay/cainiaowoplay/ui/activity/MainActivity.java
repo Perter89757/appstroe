@@ -16,7 +16,6 @@ import com.ciaoniaowoplay.cainiaowoplay.di.AppComponent;
 import com.ciaoniaowoplay.cainiaowoplay.ui.adapter.ViewPagerAdapter;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity   {
 
@@ -34,7 +33,6 @@ public class MainActivity extends BaseActivity   {
 
     @Override
     public void init() {
-        ButterKnife.bind(this);
         initDrawerLayout();
         initTablayout();
     }

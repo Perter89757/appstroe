@@ -24,15 +24,15 @@ public class RxHttpReponseCompat {
     /**
      * 该方法的作用是
      *
-     * @param <T>
-     * @return需要返回的数据类型是RX的数据源observable
+     * @param <T>     发射出去的数据类型
+     * @return         需要返回的数据类型是RX的数据源observable
      */
     public static <T>  Observable.Transformer<BaseBean<T>, T> compatResult() {
 
         return new Observable.Transformer<BaseBean<T>, T>() {
             @Override
             public Observable<T> call(Observable<BaseBean<T>> baseBeanObservable) {
-
+              //Transformer-->flatMap-->create
                 return baseBeanObservable.flatMap(new Func1<BaseBean<T>, Observable<T>>() {
                     @Override
                     public Observable<T> call(final BaseBean<T> tBaseBean) {

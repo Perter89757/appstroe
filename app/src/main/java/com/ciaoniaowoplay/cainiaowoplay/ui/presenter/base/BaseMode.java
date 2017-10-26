@@ -1,4 +1,4 @@
-package com.ciaoniaowoplay.cainiaowoplay.ui.presenter.module;
+package com.ciaoniaowoplay.cainiaowoplay.ui.presenter.base;
 
 /**
  * author: huang_yanhui
@@ -8,6 +8,6 @@ package com.ciaoniaowoplay.cainiaowoplay.ui.presenter.module;
  * description:
  */
 
-public interface BaseModule {
+public interface BaseMode {
     void request();
 }

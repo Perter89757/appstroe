@@ -1,11 +1,9 @@
-package com.ciaoniaowoplay.cainiaowoplay.ui.presenter;
+package com.ciaoniaowoplay.cainiaowoplay.ui.presenter.recommand;
 
-import com.ciaoniaowoplay.cainiaowoplay.bean.AppInfo;
-import com.ciaoniaowoplay.cainiaowoplay.bean.PageBean;
+import com.ciaoniaowoplay.cainiaowoplay.bean.IndexBean;
 import com.ciaoniaowoplay.cainiaowoplay.http.RxHttpReponseCompat;
 import com.ciaoniaowoplay.cainiaowoplay.rx.ErrorHandlerSubscriber;
-import com.ciaoniaowoplay.cainiaowoplay.ui.presenter.contract.RecommendContract;
-import com.ciaoniaowoplay.cainiaowoplay.ui.presenter.module.RecommendModule;
+import com.ciaoniaowoplay.cainiaowoplay.ui.presenter.base.BasePresenter;
 
 /**
  * author: huang_yanhui
@@ -15,34 +13,49 @@ import com.ciaoniaowoplay.cainiaowoplay.ui.presenter.module.RecommendModule;
  * description:
  */
 
-public class RecommentPresenter extends RecommendContract.Presenter {
-    RecommendContract.View view;
-    private RecommendModule module;
+public class RecommentPresenter extends BasePresenter<RecommendMode,RecommendView> {
+    RecommendView view;
+    private RecommendMode module;
 
     //@Inject
-    public RecommentPresenter(RecommendContract.View view, RecommendModule module) {
+    public RecommentPresenter(RecommendView view, RecommendMode module) {
         super(module, view);
         this.view = view;
         this.module = module;
-        //  module = new RecommendModule();
+        //  module = new RecommendMode();
     }
 
     public void request() {
-        module.getApps()
-                .compose(RxHttpReponseCompat.<PageBean<AppInfo>>compatResult())
-                .subscribe(new ErrorHandlerSubscriber<PageBean<AppInfo>>(mContext,mView) {
-                    //把请求时的progressdialog进行统一处理
-                    @Override
-                    public void onNext(PageBean<AppInfo> PageBean) {
-                        //请求成功后的完成了json的转化为bean
-                     //   view.dimssLading();
-                        if (PageBean != null) {
-                            view.showReult(PageBean.getDatas());
-                        } else {
-                            view.showNodata();
-                        }
-                    }
-                });
+
+        module.getIndex().compose(RxHttpReponseCompat.<IndexBean>compatResult()).subscribe(new ErrorHandlerSubscriber<IndexBean>(mContext,mView) {
+            @Override
+            public void onNext(IndexBean indexBean) {
+                if (indexBean != null) {
+                    view.showContent();
+                    view.showReult(indexBean);
+                } else {
+                    view.showNodata();
+                }
+            }
+        });
+
+//        module.getApps()//得到的数据类型是 Observable<BaseBean<PageBean<AppInfo>>>
+//                .compose(RxHttpReponseCompat.<PageBean<AppInfo>>compatResult())//得到的数据类型 PageBean<AppInfo>
+//                .subscribe(new ErrorHandlerSubscriber<PageBean<AppInfo>>(mContext,mView) {
+//                    //把请求时的progressdialog进行统一处理
+//                    @Override
+//                    public void onNext(PageBean<AppInfo> PageBean) {
+//                        //请求成功后的完成了json的转化为bean
+//                     //   view.dimssLading();
+//                        if (PageBean != null) {
+//                            view.showReult(PageBean.getDatas());
+//                        } else {
+//                            view.showNodata();
+//                        }
+//                    }
+//                });
+
+
         // getData3();
         //  getData2();
         // getData();

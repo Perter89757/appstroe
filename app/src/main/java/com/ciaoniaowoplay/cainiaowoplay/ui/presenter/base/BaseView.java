@@ -1,4 +1,4 @@
-package com.ciaoniaowoplay.cainiaowoplay.ui.presenter.view;
+package com.ciaoniaowoplay.cainiaowoplay.ui.presenter.base;
 
 /**
  * author: huang_yanhui
@@ -13,4 +13,5 @@ public interface BaseView {
     void dimssLading();
     void showNodata();
     void showError(String errorInfo);
+    void showContent();
 }

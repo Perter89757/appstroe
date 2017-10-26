@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.ciaoniaowoplay.cainiaowoplay.AppApplication;
 import com.ciaoniaowoplay.cainiaowoplay.R;
-import com.ciaoniaowoplay.cainiaowoplay.ui.presenter.view.BaseView;
+import com.ciaoniaowoplay.cainiaowoplay.ui.presenter.base.BaseView;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -25,9 +25,8 @@ import butterknife.Unbinder;
  * description:
  */
 
-public abstract class ProgressFragment extends Fragment implements BaseView {
+public abstract class ProgressFragment extends Fragment implements BaseView{
     private FrameLayout mRootView;
-    private Unbinder bind;
     private AppApplication application;
     private View mViewProgress;
     private FrameLayout mViewContent;
@@ -109,6 +108,10 @@ public abstract class ProgressFragment extends Fragment implements BaseView {
         }
     }
 
+    @Override
+    public void showContent() {
+        showContentView();
+    }
     @Override
     public void showError(String errorInfo) {
         showErrorView(errorInfo);

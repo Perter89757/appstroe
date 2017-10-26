@@ -3,7 +3,7 @@ package com.ciaoniaowoplay.cainiaowoplay.rx;
 import android.content.Context;
 
 import com.ciaoniaowoplay.cainiaowoplay.http.BaseException;
-import com.ciaoniaowoplay.cainiaowoplay.ui.presenter.view.BaseView;
+import com.ciaoniaowoplay.cainiaowoplay.ui.presenter.base.BaseView;
 
 /**
  * author: huang_yanhui

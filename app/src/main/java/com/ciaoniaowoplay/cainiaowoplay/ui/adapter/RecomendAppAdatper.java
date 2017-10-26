@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
  * data:2017/4/22
  * time:23:30
  * emaill:huangyh@thinkive.com
- * description:
+ * description:推荐界面recycleView
  */
 
 public class RecomendAppAdatper extends RecyclerView.Adapter<RecomendAppAdatper.ViewHolder> {

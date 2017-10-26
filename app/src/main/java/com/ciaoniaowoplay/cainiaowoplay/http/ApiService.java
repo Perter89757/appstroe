@@ -2,6 +2,7 @@ package com.ciaoniaowoplay.cainiaowoplay.http;
 
 import com.ciaoniaowoplay.cainiaowoplay.bean.AppInfo;
 import com.ciaoniaowoplay.cainiaowoplay.bean.BaseBean;
+import com.ciaoniaowoplay.cainiaowoplay.bean.IndexBean;
 import com.ciaoniaowoplay.cainiaowoplay.bean.PageBean;
 
 import retrofit2.http.GET;
@@ -26,4 +27,11 @@ public interface ApiService {
     //
     @GET("featured2")//返回的是双层bean
     public  Observable<BaseBean<PageBean<AppInfo>>> getApps(@Query("p") String jsonParam);
+
+    @GET("index")
+    public  Observable<BaseBean<IndexBean>> index();//请求需要添加公共参数
+
+
+    @GET("toplist")
+    public  Observable<BaseBean<PageBean<AppInfo>>> topList(@Query("page") int page);
 }
